@@ -29,7 +29,7 @@ class SurveyController extends Controller
      */
     public function store(StoreSurveyRequest $request)
     {
-        $result = Survey::create($request->validate());
+        $result = Survey::create($request->validated());
         return new SurveyResource($result);
     }
 
@@ -57,7 +57,7 @@ class SurveyController extends Controller
      */
     public function update(UpdateSurveyRequest $request, Survey $survey)
     {
-        $survey->update($request->validate());
+        $survey->update($request->validated());
         return new SurveyResource($survey);
     }
 
