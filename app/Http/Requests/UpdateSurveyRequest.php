@@ -13,7 +13,13 @@ class UpdateSurveyRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $survey = $this->route('survey');
+        if($this->user()->id !== $survey->user_id){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     /**
@@ -24,7 +30,13 @@ class UpdateSurveyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:1000',
+            'image' => 'nullable|string',
+            'user_id' => 'exists:user,id',
+            'status' => 'required|boolean',
+            'description' => 'nullable|string',
+            'expire_time' => 'nullable|date|after:tomorrow',
+            'questions' => 'array',
         ];
     }
 }
