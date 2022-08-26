@@ -17,7 +17,7 @@ class Survey extends Model
     const TYPE_RADIO = 'radio';
     const TYPE_CHECKBOX  = 'checkbox';
 
-    protected $fillable = ['user_id', 'image','title', 'status', 'slug', 'description', 'expire_at'];
+    protected $fillable = ['user_id', 'image','title', 'status', 'slug', 'description', 'expire_date'];
 
     public function getSlugOptions(): SlugOptions {
         return SlugOptions::create()->generateSlugsFrom('title')->saveSlugsTo('slug');
@@ -26,4 +26,9 @@ class Survey extends Model
     public function questions() {
         return $this->hasMany(SurveyQuestion::class);
     }
+
+    public function answers() {
+        return $this->hasMany(SurveyAnswer::class);
+    }
+
 }
